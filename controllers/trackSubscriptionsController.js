@@ -34,11 +34,13 @@ const getSubscription =async(req,res)=>{
 }
 
 const UpdateSubscription = async (req,res)=>{
+
+    console.log("Inside Update Subscription")
     const subscriptionID=parseInt(req.params.id)
     const {Date,Category,subscriptionName,subscriptionAmount,status,ExpenseID,LastResetDate}= req.body
 
     const response = await db.query(`UPDATE "subscriptions" SET "Date"=$1,"Category"=$2,"subscriptionAmount"=$3,"subscriptionName"=$4,"status"=$5, "ExpenseID"=$6, "LastResetDate"=$7 WHERE "subscriptionID"=$8`,[Date,Category,subscriptionAmount,subscriptionName,status,ExpenseID,LastResetDate,subscriptionID])
-
+    // console.log("update response",response)
     res.status(200).send({message:'Subscription successfully Updated!'})
 }
 

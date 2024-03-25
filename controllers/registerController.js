@@ -7,9 +7,10 @@ const handleNewUser = async(req,res)=>{
     const {user,pwd,email} = req.body;
     if(!user || !pwd || !email) return res.status(400).json({'message':'Username, password, and email are required.'});
 
+    //choose email instead of userName and send a key pwd to email which user needs to verify
      // check for duplicate usernames in the db
      const duplicate=await db.query(`SELECT * FROM "users" WHERE "userName"=$1`,[user])
-     if(duplicate.rows.length>0) return res.sendStatus(409);//conflict
+     if(duplicate.rows.length>0) return res.status(409).json({'message':'Username already exists. Please select a unique userName'});//conflict
 
      try{
         //encrypt the password

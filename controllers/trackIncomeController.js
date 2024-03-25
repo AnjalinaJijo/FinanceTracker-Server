@@ -31,10 +31,10 @@ const getIncome =async(req,res)=>{
 }
 
 const UpdateIncome = async (req,res)=>{
-    const expenseID=parseInt(req.params.id)
+    const IncomeID=parseInt(req.params.id)
     const {Date,Name,Amount,Description}= req.body
 
-    const response = await db.query(`UPDATE "Income" SET "Date"=$1,"Name"=$2,"Amount"=$3,"Description"=$4 WHERE "ExpenseID"=$5`,[Date,Name,Amount,Description,expenseID])
+    const response = await db.query(`UPDATE "Income" SET "Date"=$1,"Name"=$2,"Amount"=$3,"Description"=$4 WHERE "IncomeID"=$5`,[Date,Name,Amount,Description,IncomeID])
 
     res.status(200).send({message:'Income successfully Updated!'})
 }

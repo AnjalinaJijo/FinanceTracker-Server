@@ -43,7 +43,9 @@ const UpdateGoal = async (req,res)=>{
 }
 
 const DeleteGoal = async(req,res)=>{
+    console.log("Inside DeleteGoals")
     const GoalID = parseInt(req.params.id);
+    console.log("GoalID",GoalID)
     await db.query(`DELETE FROM "Goals" WHERE "GoalID"=$1`,[GoalID])
 
     res.status(200).send({message:'Goal Deleted Successfully!', GoalID})

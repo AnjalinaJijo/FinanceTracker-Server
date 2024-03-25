@@ -1,7 +1,7 @@
 const db = require("../config/database")
 
 const createExpense = async(req,res)=>{
-    console.log("Inside Create Expense")
+    // console.log("Inside Create Expense")
     const userID = parseInt(req.params.id);
     // console.log('hai')
     const {Date,Activity,Category,Amount,Description}= req.body
@@ -27,18 +27,21 @@ const createExpense = async(req,res)=>{
 }
 
 const getExpense =async(req,res)=>{
+    // console.log("inside GetExpense")
     const userID = parseInt(req.params.id);
     const response = await db.query(`SELECT * FROM Expenses WHERE "userID"=$1 ORDER BY "Date" DESC`,[userID])
-    // console.log(response.rows)
+    // console.log("expense",response.rows)
     res.status(200).send(response.rows)
 }
 
 const UpdateExpense = async (req,res)=>{
+    console.log("Inside UPDATE EXPENSE")
     const expenseID=parseInt(req.params.id)
+    console.log("expenseId",expenseID)
     const {Date,Activity,Category,Amount,Description}= req.body
 
     const response = await db.query(`UPDATE Expenses SET "Date"=$1,"Activity"=$2,"Category"=$3,"Amount"=$4,"Description"=$5 WHERE "ExpenseID"=$6`,[Date,Activity,Category,Amount,Description,expenseID])
-
+    console.log("update expense response",response)
     res.status(200).send({message:'Expense successfully Updated!'})
 }
 
